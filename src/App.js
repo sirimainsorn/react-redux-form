@@ -1,10 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "./component/spinner/spinner";
+import { GlobalAction } from "./store/global/global.action";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.GlobalReducer);
+
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Take control of your team.</p>
+        <button
+          className="flex sm:inline-flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2"
+          onClick={() => {
+            dispatch(GlobalAction.setLoading(true));
+          }}
+        >
+          open loading
+        </button>
+        {isLoading && <Spinner />}
       </div>
     </div>
   );
