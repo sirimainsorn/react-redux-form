@@ -4,11 +4,11 @@ import { Field, reduxForm } from "redux-form";
 import { GlobalAction } from "./store/global/global.action";
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div>
-    <label className="control-label">{label}</label>
+  <div className="mb-3">
+    <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} className={`form-control border ${touched && error ? "border-danger" : ""}`} />
-      {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      <input {...input} placeholder={label} type={type} className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight ${touched && error ? "border-red-500" : ""}`} />
+      {touched && ((error && <span className="text-red-500 text-xs">{error}</span>) || (warning && <span className="text-yellow-500 text-xs">{warning}</span>))}
     </div>
   </div>
 );
@@ -38,64 +38,64 @@ function FormCode(props) {
   const dispatch = useDispatch();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <Field
-          name="firstName"
-          component={renderField}
-          label="First Name"
-          onChange={(evt) => {
-            dispatch(
-              GlobalAction.changeFormCodeData({
-                name: evt.target.name,
-                value: evt.target.value,
-              })
-            );
-          }}
-        />
-      </div>
-      <div className="form-group">
-        <Field
-          name="lastName"
-          component={renderField}
-          label="Last Name"
-          onChange={(evt) => {
-            dispatch(
-              GlobalAction.changeFormCodeData({
-                name: evt.target.name,
-                value: evt.target.value,
-              })
-            );
-          }}
-        />
-      </div>
-      <div className="form-group">
-        <Field
-          name="email"
-          component={renderField}
-          label="Email"
-          onChange={(evt) => {
-            dispatch(
-              GlobalAction.changeFormCodeData({
-                name: evt.target.name,
-                value: evt.target.value,
-              })
-            );
-          }}
-        />
-      </div>
-      <div className="form-group">
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </div>
-    </form>
+    <div className="w-full max-w-xs mx-auto">
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="form-group">
+          <Field
+            name="firstName"
+            component={renderField}
+            label="First Name"
+            onChange={(evt) => {
+              dispatch(
+                GlobalAction.changeFormCodeData({
+                  name: evt.target.name,
+                  value: evt.target.value,
+                })
+              );
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <Field
+            name="lastName"
+            component={renderField}
+            label="Last Name"
+            onChange={(evt) => {
+              dispatch(
+                GlobalAction.changeFormCodeData({
+                  name: evt.target.name,
+                  value: evt.target.value,
+                })
+              );
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <Field
+            name="email"
+            component={renderField}
+            label="Email"
+            onChange={(evt) => {
+              dispatch(
+                GlobalAction.changeFormCodeData({
+                  name: evt.target.name,
+                  value: evt.target.value,
+                })
+              );
+            }}
+          />
+        </div>
+        <div className="form-group">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
-FormCode = reduxForm({
+export default reduxForm({
   form: "contact",
   validate,
 })(FormCode);
-
-export default FormCode;
