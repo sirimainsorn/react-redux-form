@@ -1,3 +1,4 @@
 export const GlobalConstant = {
   SPINNER_LOADING: "SPINNER_LOADING",
+  CHANGE_FORM_CODE_DATA: "CHANGE_FORM_CODE_DATA",
 };
